@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="EventEntryJsonPacketFactory.cs" />
     <Compile Include="EventSourceRavenClient.cs" />
+    <Compile Include="FormattedExceptionLocator.cs" />
     <Compile Include="IEventSourceRavenClient.cs" />
     <Compile Include="ISentryExceptionLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
