@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Push" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<PropertyGroup>
+		<SolutionName>EnterpriseLibrary.SemanticLogging.Sentry</SolutionName>
+		<SolutionDir>src\</SolutionDir>
+	</PropertyGroup>
+
+	<Target Name="WriteAssemblyVersionInfo">
+		<Error Condition="'$(PackageVersion)' == ''"
+				Text="PackageVersion must be specified" />
+				
+		<PropertyGroup>
+			<AssemblyVersion>$([System.Text.RegularExpressions.Regex]::Match($(PackageVersion), `\d+(\.\d+)+`))</AssemblyVersion>
+		</PropertyGroup>
+	
+		<ItemGroup>
+			<AssemblyVersionLines 
+				Include="[assembly: System.Reflection.AssemblyVersion(&quot;$(AssemblyVersion)&quot;)]" />
+			<AssemblyVersionLines 
+				Include="[assembly: System.Reflection.AssemblyFileVersion(&quot;$(AssemblyVersion)&quot;)]" />
+		</ItemGroup>
+		<WriteLinesToFile File="$(SolutionDir)AssemblyVersionInfo.cs" Lines="@(AssemblyVersionLines)" Overwrite="true" />
+	</Target>
+	
+	<Target Name="FindNuGetCli">
+		<XmlPeek XmlInputPath="$(SolutionDir).nuget\packages.config"
+				 Query="/packages/package[@id='NuGet.CommandLine']/@version">
+			<Output TaskParameter="Result" ItemName="NuGetCliVersion" />
+		</XmlPeek>
+		 
+		<PropertyGroup>
+			<NuGetCli>$(SolutionDir)packages\NuGet.CommandLine.@(NuGetCliVersion)\tools\NuGet.exe</NuGetCli>
+		</PropertyGroup>
+	</Target>
+
+	<Target Name="Build" DependsOnTargets="WriteAssemblyVersionInfo">
+		<MSBuild Projects="$(SolutionDir)$(SolutionName).sln" Properties="Configuration=Release" />
+	</Target>
+
+	<Target Name="Package" DependsOnTargets="Build;FindNuGetCli">
+		<ItemGroup>
+			<NuSpecFiles Include="$(SolutionDir)*.nuspec" />
+		</ItemGroup>
+		
+		<Exec Command="$(NuGetCli) pack $(SolutionDir)@(NuSpecFiles->'%(Filename)').nuspec -Version $(PackageVersion)" />
+	</Target>
+	
+	<Target Name="Push" DependsOnTargets="Package;FindNuGetCli">
+		<ItemGroup>
+			<NuSpecFiles Include="$(SolutionDir)*.nuspec" />
+		</ItemGroup>
+		
+		<Exec Command="$(NuGetCli) push @(NuSpecFiles->'%(Filename)').$(PackageVersion).nupkg -NonInteractive" />
+	
+	</Target>
+
+</Project>

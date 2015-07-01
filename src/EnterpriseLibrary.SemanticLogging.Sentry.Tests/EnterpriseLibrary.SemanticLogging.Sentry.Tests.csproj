@@ -59,6 +59,9 @@
     <Compile Include="FormattedExceptionLocatorTests.cs" />
     <Compile Include="SentryExceptionParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+	<Compile Include="..\AssemblyVersionInfo.cs" Condition="Exists('..\AssemblyVersionInfo.cs')">
+      <Link>Properties\AssemblyVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="SentrySinkTests.cs" />
   </ItemGroup>
   <ItemGroup>

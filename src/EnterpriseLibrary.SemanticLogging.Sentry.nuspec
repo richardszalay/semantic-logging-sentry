@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>EnterpriseLibrary.SemanticLogging.Sentry</id>
+    <version>1.0.0-beta</version>
+    <title>Sentry sink for Semantic Logging</title>
+	<description>Adds support for logging Semantic Logging events to Sentry</description>
+    <authors>Richard Szalay</authors>
+    <owners>Richard Szalay</owners>
+    <licenseUrl>https://github.com/richardszalay/semantic-logging-sentry/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/richardszalay/semantic-logging-sentry</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes>1.0.0 - Basic support for buffered integration with Sentry</releaseNotes>
+    <copyright>Copyright 2015 Richard Szalay</copyright>
+    <tags>slab semantic logging sentry raven</tags>
+	<dependencies>
+		<dependency id="SharpRaven" version="1.4.4" />
+	</dependencies>
+  </metadata>
+  <files>
+    <file src="EnterpriseLibrary.SemanticLogging.Sentry\bin\Release\EnterpriseLibrary.SemanticLogging.Sentry.*" target="lib\net45" />
+  </files>
+
+</package>

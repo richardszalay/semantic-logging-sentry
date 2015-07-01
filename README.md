@@ -42,11 +42,15 @@ The `ISentryExceptionLocator` interface solves a disconnect between Sentry, whic
 
 A `null` value can be provided to disable the feature entirely.
 
+## Target Frameworks
+
+Currently only .NET 4.5 is supported, but it's planned to support everything that SharpSentry supports.
+
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Richard Szalay
+Copyright (c) 2015 Richard Szalay
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
