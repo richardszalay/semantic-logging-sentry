@@ -51,7 +51,7 @@
 			<NuSpecFiles Include="$(SolutionDir)*.nuspec" />
 		</ItemGroup>
 		
-		<Exec Command="$(NuGetCli) push @(NuSpecFiles->'%(Filename)').$(PackageVersion).nupkg -NonInteractive" />
+		<Exec Command="$(NuGetCli) push %(NuSpecFiles.Filename).$(PackageVersion).nupkg -NonInteractive" />
 	
 	</Target>
 
