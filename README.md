@@ -10,7 +10,9 @@ The initial implementation has the following caveats:
 
 ## Installation
 
-Coming soon
+Recommended installation is via NuGet:
+
+    PM> Install-Package EnterpriseLibrary.SemanticLogging.Sentry -IncludePrerelease
 
 ## Usage
 
